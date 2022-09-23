@@ -46,13 +46,15 @@ while True:
         if starttime < currenttime and currenttime < stoptime:
             if checkIfProcessNotRunning(tag):
                 if needToUp == 'Yes':
-                     logger(name,currenttime)
+                     #logger(name,currenttime)
+                     logger.debug( ":" + name + " is not running")
                      mail_send(name)
                      os.chdir(runScriptPath)
                      subprocess.call(['sh', runScript])
                      time.sleep(20)
                 else:
-                     logger(name,currenttime)
+                     #logger(name,currenttime)
+                     logger.debug( ":" + name + " is not running")
                      mail_send(name)
 
     
