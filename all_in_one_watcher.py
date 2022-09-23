@@ -53,7 +53,7 @@ while True:
                      try:
                         #subprocess.call(['sh', runScript])
                         output = subprocess.check_output(['sh', runScript])
-                        logger.error( f":{name} : ./{runScript} {output}")
+                        #logger.error( f":{name} : ./{runScript} {output}")
                      except:
                         logger.error( f":{name} : ./{runScript} cannot execute")
                      time.sleep(20)
