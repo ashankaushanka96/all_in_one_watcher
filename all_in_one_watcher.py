@@ -22,10 +22,6 @@ def checkIfProcessNotRunning(processname):
     return False
    else:
     return True
-def logger_class(name,currenttime):
-   with open('watcher-log.txt', 'a') as f:
-      f.write(currenttime + ":" + name + " is not running")
-      f.write('\n')
 
 while True:    
  for section_name in parser.sections():
@@ -48,14 +44,18 @@ while True:
         if starttime < currenttime and currenttime < stoptime:
             if checkIfProcessNotRunning(tag):
                 if needToUp == 'Yes':
-                     #logger(name,currenttime)
-                     logger.debug( f":  {name}   is not running")
+                     logger.debug( f":{name} is not running. Restarting the component")
                      mail_send(name)
-                     os.chdir(runScriptPath)
-                     subprocess.call(['sh', runScript])
+                     try:
+                        os.chdir(runScriptPath)
+                     except:
+                        logger.error( f":{name} : {runScriptPath} directory not found")
+                     try:
+                        subprocess.call(['sh', runScript])
+                     except:
+                        logger.error( f":{name} : ./{runScript} cannot execute")
                      time.sleep(20)
                 else:
-                     #logger(name,currenttime)
                      logger.debug( f":  {name}   is not running")
                      mail_send(name)
 
