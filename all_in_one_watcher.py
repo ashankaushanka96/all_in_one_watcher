@@ -10,7 +10,9 @@ from time import sleep
 import os
 parser = configparser.ConfigParser()
 parser.read('config.ini')
-logging.basicConfig(filename='warning.log', level=logging.DEBUG)
+logging.basicConfig(filename='warning.log', format='%(asctime)s %(message)s')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 def checkIfProcessNotRunning(processname):
    process = subprocess.Popen("ps x|grep -ai {} |grep -v grep |wc -l".format(processname),
                            shell=True, stdout=subprocess.PIPE,
@@ -47,14 +49,14 @@ while True:
             if checkIfProcessNotRunning(tag):
                 if needToUp == 'Yes':
                      #logger(name,currenttime)
-                     logger.debug( ":" + name + " is not running")
+                     logger.debug( f":  {name}   is not running")
                      mail_send(name)
                      os.chdir(runScriptPath)
                      subprocess.call(['sh', runScript])
                      time.sleep(20)
                 else:
                      #logger(name,currenttime)
-                     logger.debug( ":" + name + " is not running")
+                     logger.debug( f":  {name}   is not running")
                      mail_send(name)
 
     
