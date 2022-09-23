@@ -42,14 +42,14 @@ while True:
                 if needToUp == 'Yes':
                     subprocess.call(['sh', runScriptPath])
                     mail_send(name) 
-                with open('watcher-log.txt', 'a') as f:
-                    f.write(currenttime + ":" + name + " is not running")
-                    f.write('\n')
+                    with open('watcher-log.txt', 'a') as f:
+                        f.write(currenttime + ":" + name + " is not running")
+                        f.write('\n')
                 else:
                     mail_send(name)
                     with open('watcher-log.txt', 'a') as f:
-                    f.write(currenttime + ":" + name + " is not running")
-                    f.write('\n')
+                        f.write(currenttime + ":" + name + " is not running")
+                        f.write('\n')
 
     time.sleep(20)
         
