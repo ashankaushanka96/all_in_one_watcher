@@ -24,6 +24,7 @@ def logger(name,currenttime):
    with open('watcher-log.txt', 'a') as f:
       f.write(currenttime + ":" + name + " is not running")
       f.write('\n')
+      f.close()
 
 while True:    
  for section_name in parser.sections():
