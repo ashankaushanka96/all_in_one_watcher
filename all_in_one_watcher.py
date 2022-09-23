@@ -51,7 +51,7 @@ while True:
                      except:
                         logger.error( f":{name} : {runScriptPath} directory not found")
                      try:
-                        subprocess.call(['sh', runScript])
+                        #subprocess.call(['sh', runScript])
                         print(subprocess.check_output(['sh', runScript]))
                      except:
                         logger.error( f":{name} : ./{runScript} cannot execute")
