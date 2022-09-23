@@ -22,7 +22,7 @@ def checkIfProcessNotRunning(processname):
     return False
    else:
     return True
-def logger(name,currenttime):
+def logger_class(name,currenttime):
    with open('watcher-log.txt', 'a') as f:
       f.write(currenttime + ":" + name + " is not running")
       f.write('\n')
