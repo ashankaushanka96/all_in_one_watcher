@@ -2,7 +2,7 @@
 from curses import echo
 import datetime
 import configparser
-import send_mail 
+from send_mail import mail_send 
 import time
 import subprocess
 import logging
@@ -40,16 +40,17 @@ while True:
         if starttime < currenttime and currenttime < stoptime:
             if checkIfProcessNotRunning(name):
                 if needToUp == 'Yes':
-                    subprocess.call(['sh', runScriptPath])
-                    mail_send(name) 
-                    with open('watcher-log.txt', 'a') as f:
+                     mail_send(name)
+                     subprocess.call(['sh', runScriptPath])
+                     time.sleep(20) 
+                     with open('watcher-log.txt', 'a') as f:
                         f.write(currenttime + ":" + name + " is not running")
                         f.write('\n')
                 else:
-                    mail_send(name)
-                    with open('watcher-log.txt', 'a') as f:
+                     mail_send(name)
+                     with open('watcher-log.txt', 'a') as f:
                         f.write(currenttime + ":" + name + " is not running")
                         f.write('\n')
 
-    time.sleep(20)
+    
         
