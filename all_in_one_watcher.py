@@ -7,6 +7,7 @@ import time
 import subprocess
 import logging
 from time import sleep
+import os
 parser = configparser.ConfigParser()
 parser.read('config.ini')
 logging.basicConfig(filename='warning.log', level=logging.DEBUG)
@@ -31,6 +32,7 @@ while True:
     needToUp = value[5][1]
     try:
         runScriptPath = value[6][1]
+        runScript = value[7][1]
     except:
         continue
     currenttime = datetime.datetime.now().strftime("%H:%M:%S")
@@ -41,7 +43,8 @@ while True:
             if checkIfProcessNotRunning(name):
                 if needToUp == 'Yes':
                      mail_send(name)
-                     subprocess.call(['sh', runScriptPath])
+                     os.chdir(runScriptPath)
+                     subprocess.call(['sh', runScript])
                      time.sleep(20) 
                      with open('watcher-log.txt', 'a') as f:
                         f.write(currenttime + ":" + name + " is not running")
