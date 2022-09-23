@@ -8,6 +8,7 @@ import subprocess
 import logging
 from time import sleep
 import os
+with open('watcher-log.txt', 'a') as f:
 parser = configparser.ConfigParser()
 parser.read('config.ini')
 logging.basicConfig(filename='warning.log', level=logging.DEBUG)
@@ -21,10 +22,8 @@ def checkIfProcessNotRunning(processname):
    else:
     return True
 def logger(name,currenttime):
-   with open('watcher-log.txt', 'a') as f:
       f.write(currenttime + ":" + name + " is not running")
       f.write('\n')
-      f.close()
 
 while True:    
  for section_name in parser.sections():
