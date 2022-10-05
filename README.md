@@ -1,4 +1,5 @@
 # pyhton-watcher
+[config.ini]
 [SearchService]--------------------------> Just a name tag no use in code
 tag = Search-Services-SSS----------------> Unique tag that can find the component(Ex: garbage value in run scripts)
 startTime = 00:00:00---------------------> Start time in GMT(Server Time)
@@ -9,3 +10,5 @@ needToUp = Yes --------------------------> Need to up the component(Yes/No)
 runScriptPath = /home/directfn/app/search_services
 runScript = exec.sh ---------------------> run script(Ex : run.sh, exec.sh)
 
+[sendmail.py]
+body = """172.18.29.151 - %s COMPONENT IS DOWN""" % processname ----> need to change the IP
