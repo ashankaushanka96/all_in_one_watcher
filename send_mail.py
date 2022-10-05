@@ -13,6 +13,7 @@ username="AKIAYG3FQ3BQTJWD3AI2"
 passswrd="BBgk3CKU3pAFkKesOjhfXwH8Lnqjk6Y1CUS5FvtqmMjn"
 
 def mail_send(processname):
+ hostname = socket.gethostname()
  ip_address = socket.gethostbyname(hostname)
  msg = MIMEMultipart()
  msg['From'] = fromaddr
