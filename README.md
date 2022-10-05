@@ -11,4 +11,5 @@ runScriptPath = /home/directfn/app/search_services
 runScript = exec.sh ---------------------> run script(Ex : run.sh, exec.sh)
 
 [sendmail.py]
-body = """172.18.29.151 - %s COMPONENT IS DOWN""" % processname ----> need to change the IP
+
+fromaddr="DM_GLOBAL@gtnasia.com" ------->Change from address
