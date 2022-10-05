@@ -3,22 +3,28 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import sys
 import string
+import socket
 
-fromaddr="watcher@dfnplus.com"
+fromaddr="DM_GLOBAL@gtnasia.com"
 #toaddr="feed.alerts@gtngroup.com"
 toaddr="p.ashan@gtngroup.com"
 
+username="AKIAYG3FQ3BQTJWD3AI2"
+passswrd="BBgk3CKU3pAFkKesOjhfXwH8Lnqjk6Y1CUS5FvtqmMjn"
+
 def mail_send(processname):
+ ip_address = socket.gethostbyname(hostname)
  msg = MIMEMultipart()
  msg['From'] = fromaddr
  msg['To'] = toaddr
- msg['Subject'] = " UAT- %s COMPONENT IS DOWN" % processname
+ msg['Subject'] = " %s COMPONENT IS DOWN" % processname
 
- body = """172.18.29.151 - %s COMPONENT IS DOWN""" % processname
+ body = """%s - %s COMPONENT IS DOWN""" % (ip_address, processname)
  msg.attach(MIMEText(body, 'plain'))
 
- server = smtplib.SMTP('172.18.41.71')
+ server = smtplib.SMTP('email-smtp.ap-southeast-1.amazonaws.com',587)
  server.starttls()
+ server.login(username,passswrd)
  text = msg.as_string()
  server.sendmail(fromaddr, toaddr, text)
  server.quit()
