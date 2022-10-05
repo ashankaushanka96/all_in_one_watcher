@@ -7,12 +7,6 @@ import string
 fromaddr="watcher@dfnplus.com"
 #toaddr="feed.alerts@gtngroup.com"
 toaddr="p.ashan@gtngroup.com"
-#toaddr="t.pulendran@gtngroup.com"
-#toaddr="s.daminda@theglobalmarketaccess.com"
-
-
-
-
 
 def mail_send(processname):
  msg = MIMEMultipart()
