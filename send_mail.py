@@ -4,15 +4,17 @@ from email.mime.text import MIMEText
 import sys
 import string
 import socket
+import os
+from dotenv import load_dotenv
 
 fromaddr="DM_GLOBAL@gtnasia.com"
 #toaddr="feed.alerts@gtngroup.com"
 toaddr="p.ashan@gtngroup.com"
 
-username="AKIAYG3FQ3BQTJWD3AI2"
-passswrd="BBgk3CKU3pAFkKesOjhfXwH8Lnqjk6Y1CUS5FvtqmMjn"
-
 def mail_send(processname):
+ load_dotenv()
+ username=os.getenv('USERNAME')
+ passswrd=os.getenv('PASSWORD')
  hostname = socket.gethostname()
  ip_address = socket.gethostbyname(hostname)
  msg = MIMEMultipart()
