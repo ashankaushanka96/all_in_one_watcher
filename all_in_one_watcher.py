@@ -7,8 +7,10 @@ import subprocess
 import logging
 import os
 parser = configparser.ConfigParser()
-parser.read('./config/config.ini')
-logging.basicConfig(filename='./logs/warning.log', format='%(asctime)s %(message)s')
+# parser.read('./config/config.ini')
+# logging.basicConfig(filename='./logs/warning.log', format='%(asctime)s %(message)s')
+parser.read('config.ini')
+logging.basicConfig(filename='warning.log', format='%(asctime)s %(message)s')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 def checkIfProcessNotRunning(processname):
