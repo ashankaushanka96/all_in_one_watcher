@@ -7,12 +7,9 @@ import subprocess
 import logging
 import os
 parser = configparser.ConfigParser()
-# parser.read('./config/config.ini')
 logging.basicConfig(filename='./logs/warning.log', format='%(asctime)s %(message)s')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-# parser.read('config.ini')
-# logging.basicConfig(filename='warning.log', format='%(asctime)s %(message)s')
 
 def checkIfProcessNotRunning(processname):
    process = subprocess.Popen("ps x|grep -ai {} |grep -v grep |wc -l".format(processname),
@@ -57,13 +54,14 @@ while True:
                         logger.debug( f":{name} Successfully restarted the component")
                      except:
                         logger.error( f":{name} : ./{runScript} cannot execute")
-                     time.sleep(20)
+                     time.sleep(18)
                   else:
                      logger.debug( f":  {name}   is not running")
+                     time.sleep(3)
                      try:
                         mail_send(name)
                      except Exception as e:
                         logger.error(f":{name} : {e}")
-
+      time.sleep(2)
     
         
