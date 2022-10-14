@@ -8,11 +8,12 @@ import logging
 import os
 parser = configparser.ConfigParser()
 # parser.read('./config/config.ini')
-# logging.basicConfig(filename='./logs/warning.log', format='%(asctime)s %(message)s')
-parser.read('config.ini')
-logging.basicConfig(filename='warning.log', format='%(asctime)s %(message)s')
+logging.basicConfig(filename='./logs/warning.log', format='%(asctime)s %(message)s')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+# parser.read('config.ini')
+# logging.basicConfig(filename='warning.log', format='%(asctime)s %(message)s')
+
 def checkIfProcessNotRunning(processname):
    process = subprocess.Popen("ps x|grep -ai {} |grep -v grep |wc -l".format(processname),
                            shell=True, stdout=subprocess.PIPE,
@@ -23,27 +24,28 @@ def checkIfProcessNotRunning(processname):
    else:
     return True
 
-while True:    
- for section_name in parser.sections():
-    value = parser.items(section_name)
-    tag = value[0][1]
-    starttime = value[1][1]
-    stoptime = value[2][1]
-    weekday =value[3][1]
-    name = value[4][1]
-    needToUp = value[5][1]
-    try:
-        runScriptPath = value[6][1]
-        runScript = value[7][1]
-    except:
-        continue
-    currenttime = datetime.datetime.now().strftime("%H:%M:%S")
-    weekdaytime = datetime.datetime.now().weekday()
+while True:
+   parser.read('./config/config.ini')    
+   for section_name in parser.sections():
+      value = parser.items(section_name)
+      tag = value[0][1]
+      starttime = value[1][1]
+      stoptime = value[2][1]
+      weekday =value[3][1]
+      name = value[4][1]
+      needToUp = value[5][1]
+      try:
+         runScriptPath = value[6][1]
+         runScript = value[7][1]
+      except:
+         continue
+      currenttime = datetime.datetime.now().strftime("%H:%M:%S")
+      weekdaytime = datetime.datetime.now().weekday()
 
-    if (str(weekdaytime) in str(weekday)):
-        if starttime < currenttime and currenttime < stoptime:
+      if (str(weekdaytime) in str(weekday)):
+         if starttime < currenttime and currenttime < stoptime:
             if checkIfProcessNotRunning(tag):
-                if needToUp == 'Yes':
+                  if needToUp == 'Yes':
                      logger.debug( f":{name} is not running. Restarting the component")
                      mail_send(name)
                      try:
@@ -51,15 +53,17 @@ while True:
                      except:
                         logger.error( f":{name} : {runScriptPath} directory not found")
                      try:
-                        #subprocess.call(['sh', runScript])
                         output = subprocess.check_output(['sh', runScript])
-                        #logger.error( f":{name} : ./{runScript} {output}")
+                        logger.debug( f":{name} Successfully restarted the component")
                      except:
                         logger.error( f":{name} : ./{runScript} cannot execute")
                      time.sleep(20)
-                else:
+                  else:
                      logger.debug( f":  {name}   is not running")
-                     mail_send(name)
+                     try:
+                        mail_send(name)
+                     except Exception as e:
+                        logger.error(f":{name} : {e}")
 
     
         
