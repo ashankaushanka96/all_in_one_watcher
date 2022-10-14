@@ -31,11 +31,7 @@ while True:
       weekday =value[3][1]
       name = value[4][1]
       needToUp = value[5][1]
-      try:
-         runScriptPath = value[6][1]
-         runScript = value[7][1]
-      except:
-         continue
+      
       currenttime = datetime.datetime.now().strftime("%H:%M:%S")
       weekdaytime = datetime.datetime.now().weekday()
 
@@ -43,6 +39,8 @@ while True:
          if starttime < currenttime and currenttime < stoptime:
             if checkIfProcessNotRunning(tag):
                   if needToUp == 'Yes':
+                     runScriptPath = value[6][1]
+                     runScript = value[7][1]
                      logger.debug( f":{name} is not running. Restarting the component")
                      mail_send(name)
                      try:
