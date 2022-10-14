@@ -10,6 +10,6 @@ needToUp = Yes --------------------------> Need to up the component(Yes/No)
 runScriptPath = /home/directfn/app/search_services
 runScript = exec.sh ---------------------> run script(Ex : run.sh, exec.sh)
 
-[sendmail.py]
+[send_mail.py]
 
-fromaddr="DM_GLOBAL@gtnasia.com" ------->Change from address
+fromaddr="DM_GLOBAL@gtnasia.com" ------->Change fromaddr and toaddr

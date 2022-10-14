@@ -52,12 +52,12 @@ while True:
                         logger.error( f":{name} : {runScriptPath} directory not found")
                      try:
                         output = subprocess.check_output(['sh', runScript])
-                        logger.debug( f":{name} Successfully restarted the component")
+                        logger.debug( f":{name} Successfully Restarted")
                      except:
                         logger.error( f":{name} : ./{runScript} cannot execute")
                      time.sleep(18)
                   else:
-                     logger.debug( f":  {name}   is not running")
+                     logger.debug( f":  {name} is not running")
                      time.sleep(3)
                      try:
                         mail_send(name)

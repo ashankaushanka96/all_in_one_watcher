@@ -10,23 +10,23 @@ fromaddr="DM_GLOBAL@gtnasia.com"
 toaddr="p.ashan@gtngroup.com"
 
 def mail_send(processname):
- load_dotenv()
- username=os.getenv('USERNAME')
- passswrd=os.getenv('PASSWORD')
- hostname = socket.gethostname()
- ip_address = socket.gethostbyname(hostname)
- msg = MIMEMultipart()
- msg['From'] = fromaddr
- msg['To'] = toaddr
- msg['Subject'] = " %s COMPONENT IS DOWN" % processname
+    load_dotenv()
+    username=os.getenv('USERNAME')
+    passswrd=os.getenv('PASSWORD')
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = " %s COMPONENT IS DOWN" % processname
 
- body = """%s - %s COMPONENT IS DOWN""" % (ip_address, processname)
- msg.attach(MIMEText(body, 'plain'))
+    body = """%s - %s COMPONENT IS DOWN""" % (ip_address, processname)
+    msg.attach(MIMEText(body, 'plain'))
 
- server = smtplib.SMTP('email-smtp.ap-southeast-1.amazonaws.com',587)
- server.starttls()
- server.login(username,passswrd)
- text = msg.as_string()
- server.sendmail(fromaddr, toaddr, text)
- server.quit()
+    server = smtplib.SMTP('email-smtp.ap-southeast-1.amazonaws.com',587)
+    server.starttls()
+    server.login(username,passswrd)
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
 
