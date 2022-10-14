@@ -39,8 +39,11 @@ while True:
          if starttime < currenttime and currenttime < stoptime:
             if checkIfProcessNotRunning(tag):
                   if needToUp == 'Yes':
-                     runScriptPath = value[6][1]
-                     runScript = value[7][1]
+                     try:
+                        runScriptPath = value[6][1]
+                        runScript = value[7][1]
+                     except:
+                        logger.error( f":{name} : runScriptPath and runScript is not defined")
                      logger.debug( f":{name} is not running. Restarting the component")
                      mail_send(name)
                      try:
